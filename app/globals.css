@@ -1,0 +1,116 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Primary Brand Color - Purple/Violet */
+  --purple-600: #7c3aed;
+  --purple-500: #a855f7;
+  --purple-400: #c084fc;
+  --purple-50: #faf5ff;
+  --purple-100: #f3e8ff;
+  
+  /* Neutrals */
+  --white: #ffffff;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-600: #4b5563;
+  --gray-900: #111827;
+  
+  /* Design Tokens */
+  --background: var(--white);
+  --foreground: var(--gray-900);
+  --card: var(--gray-50);
+  --card-foreground: var(--gray-900);
+  --popover: var(--white);
+  --popover-foreground: var(--gray-900);
+  --primary: var(--purple-600);
+  --primary-foreground: var(--white);
+  --secondary: var(--purple-100);
+  --secondary-foreground: var(--purple-600);
+  --muted: var(--gray-200);
+  --muted-foreground: var(--gray-600);
+  --accent: var(--purple-500);
+  --accent-foreground: var(--white);
+  --destructive: #dc2626;
+  --destructive-foreground: var(--white);
+  --border: var(--gray-200);
+  --input: var(--gray-100);
+  --ring: var(--purple-600);
+  --chart-1: var(--purple-600);
+  --chart-2: #3b82f6;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: var(--gray-900);
+  --foreground: var(--white);
+  --card: #1f2937;
+  --card-foreground: var(--white);
+  --popover: #1f2937;
+  --popover-foreground: var(--white);
+  --primary: var(--purple-500);
+  --primary-foreground: var(--gray-900);
+  --secondary: #3730a3;
+  --secondary-foreground: var(--purple-400);
+  --muted: #4b5563;
+  --muted-foreground: #9ca3af;
+  --accent: var(--purple-400);
+  --accent-foreground: var(--gray-900);
+  --destructive: #f87171;
+  --destructive-foreground: var(--gray-900);
+  --border: #374151;
+  --input: #1f2937;
+  --ring: var(--purple-500);
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius: var(--radius);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all;
+  }
+}
