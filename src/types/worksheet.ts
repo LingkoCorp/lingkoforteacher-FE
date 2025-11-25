@@ -1,5 +1,3 @@
-import { LanguageCode } from "./language";
-
 export interface Expression {
   korean: string;
   romanization: string;
@@ -19,21 +17,13 @@ export interface GrammarPoint {
   example: string;
 }
 
-export interface QuizData {
+export interface WorksheetData {
   situation: string;
   expressions: Expression[];
   vocabulary: VocabularyItem[];
   grammar_points: GrammarPoint[];
+  worksheet_structure: Record<string, any>
 }
 
-// api Request
-export interface QuizRequest{
-  languageCode: LanguageCode;
-  level: string; // 난이도
-  learningSituation: string // 학습 상황
-}
-
-// api Response
-export interface QuizResponse extends QuizData {}
 
 

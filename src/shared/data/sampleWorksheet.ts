@@ -1,8 +1,8 @@
 // src/data/quizSample.js
 
-import { QuizData } from "@/types/quiz";
+import { WorksheetData } from "@/types/worksheet";
 
-export const sampleQuiz : QuizData = {
+export const sampleWorksheet : WorksheetData = {
   situation: "손님이 많은 주말 오후, 카페 아르바이트생이 주문을 받고 음료를 제공하며 결제와 관련된 일반적인 서비스를 처리하는 상황.",
   expressions: [
     {
@@ -109,5 +109,6 @@ export const sampleQuiz : QuizData = {
       translation: "Formal polite ending (Used when addressing a customer or public)",
       example: "총 만 삼천 원입니다."
     }
-  ]
+  ],
+  worksheet_structure:{}
 };

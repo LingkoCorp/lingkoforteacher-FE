@@ -1,14 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import { QuizForm, QuizFormValues } from '@/features/quiz/components/quiz-form';
+import { WorksheetForm, WorksheetFormValues } from '@/features/worksheet/components/worksheet-form';
 import Logo from '@/shared/ui/logo';
 
-interface QuizIntroStepProps {
-  onSubmit: (data: QuizFormValues) => void;
+interface WorksheetIntroStepProps {
+  onSubmit: (data: WorksheetFormValues) => void;
 }
 
-export default function QuizIntroStep({ onSubmit }: QuizIntroStepProps) {
+export default function WorksheetIntroStep({ onSubmit }: WorksheetIntroStepProps) {
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center">
@@ -28,7 +28,7 @@ export default function QuizIntroStep({ onSubmit }: QuizIntroStepProps) {
           </p>
         </div>
 
-        <QuizForm onSubmit={onSubmit} />
+        <WorksheetForm onSubmit={onSubmit} />
       </div>
     </div>
   )

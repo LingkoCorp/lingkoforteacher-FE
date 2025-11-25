@@ -1,13 +1,13 @@
 'use client'
 
 import { Card } from '@/shared/ui/card';
-import { QuizData } from '@/types/quiz'
+import { WorksheetData } from '@/types/worksheet'
 
-interface QuizTemplateBasicProps {
-  quiz: QuizData;
+interface WorksheetTemplateBasicProps {
+  worksheetData: WorksheetData;
 }
 
-export default function QuizTemplateBasic({ quiz }: QuizTemplateBasicProps) {
+export default function WorksheetTemplateBasic({ worksheetData: worksheetData }: WorksheetTemplateBasicProps) {
   return (
     <div className="w-full max-w-4xl space-y-10 print:space-y-8">
       {/* Header Section */}
@@ -16,7 +16,7 @@ export default function QuizTemplateBasic({ quiz }: QuizTemplateBasicProps) {
           🏪 카페 아르바이트 한국어
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed print:text-base">
-          {quiz.situation}
+          {worksheetData.situation}
         </p>
       </div>
 
@@ -26,7 +26,7 @@ export default function QuizTemplateBasic({ quiz }: QuizTemplateBasicProps) {
           📝 주요 표현
         </h2>
         <div className="grid gap-3">
-          {quiz.expressions.map((expr, idx) => (
+          {worksheetData.expressions.map((expr, idx) => (
             <Card
               key={idx}
               className="p-4 border-l-4 border-l-primary print:break-inside-avoid print:page-break-inside-avoid"
@@ -53,7 +53,7 @@ export default function QuizTemplateBasic({ quiz }: QuizTemplateBasicProps) {
           📚 주요 단어
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 print:grid-cols-2 print:gap-2">
-          {quiz.vocabulary.map((vocab, idx) => (
+          {worksheetData.vocabulary.map((vocab, idx) => (
             <Card
               key={idx}
               className="p-3 border-l-4 border-l-accent print:p-2 print:break-inside-avoid"
@@ -80,7 +80,7 @@ export default function QuizTemplateBasic({ quiz }: QuizTemplateBasicProps) {
           🔤 문법 패턴
         </h2>
         <div className="grid gap-4 print:gap-2">
-          {quiz.grammar_points.map((gram, idx) => (
+          {worksheetData.grammar_points.map((gram, idx) => (
             <Card
               key={idx}
               className="p-5 border-l-4 border-l-primary print:p-3 print:break-inside-avoid"
@@ -109,7 +109,7 @@ export default function QuizTemplateBasic({ quiz }: QuizTemplateBasicProps) {
       </div>
 
       {/* Section 4: Practice Questions */}
-      <div className="space-y-4">
+      {/* <div className="space-y-4">
         <h2 className="text-2xl font-bold text-primary border-b-2 border-primary pb-2 print:text-xl">
           ✏️ 연습 문제
         </h2>
@@ -154,7 +154,7 @@ export default function QuizTemplateBasic({ quiz }: QuizTemplateBasicProps) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

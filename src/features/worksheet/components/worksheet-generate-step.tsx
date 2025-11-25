@@ -3,35 +3,34 @@
 import Logo from "@/shared/ui/logo";
 import { useEffect, useState } from "react";
 
-interface QuizGenerateStepProps {
+interface WorksheetGenerateStepProps {
   onStart: () => void;
   loading: boolean;
 }
 
-export default function QuizGenerateStep({ onStart, loading }: QuizGenerateStepProps) {
+export default function WorksheetGenerateStep({
+  onStart,
+  loading,
+}: WorksheetGenerateStepProps) {
   const [progress, setProgress] = useState(0);
 
-  // 1) 마운트되면 바로 생성 시작
   useEffect(() => {
     onStart();
   }, [onStart]);
 
-  // 2) loading 변화에 따라 진행률 제어
   useEffect(() => {
     if (loading) {
-      // ✅ 로딩 시작 시 0으로 리셋
       setProgress(0);
 
       const interval = setInterval(() => {
         setProgress((prev) => {
           const next = prev + Math.random() * 15;
-          return next >= 90 ? 90 : next; // 90%에서 대기
+          return next >= 90 ? 90 : next;
         });
       }, 300);
 
       return () => clearInterval(interval);
     } else {
-      // ✅ 로딩 끝났을 때만 100%
       setProgress(100);
     }
   }, [loading]);
@@ -57,7 +56,7 @@ export default function QuizGenerateStep({ onStart, loading }: QuizGenerateStepP
         </div>
 
         <p className="mt-6 text-muted-foreground">
-          퀴즈를 생성하고 있어요...
+          학습지를 생성하고 있어요...
         </p>
       </div>
     </div>
