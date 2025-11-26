@@ -10,36 +10,15 @@ export interface CreateWorksheetRequest {
 }
 
 export interface CreateWorksheetResponse {
-  id: string;
   status: WorksheetStatus;
-  message: string;
-}
-
-export interface GetWorksheetResponse {
-  id: string;
-  status: WorksheetStatus;
-  level: string;
-  nationality: string;
-  goal: string;
-  created_at: string;
-  updated_at: string;
-  pdf_url: string;
-  error_message?: string;
   content: WorksheetData;
+  error?: string;
 }
 
-// 학습지 생성 api
+// 학습지 생성 api (폴링 없이 바로 응답)
 export const createWorksheet = async (
   data: CreateWorksheetRequest
 ): Promise<CreateWorksheetResponse> => {
   const response = await httpClient.post("/api/worksheets", data);
-  return response.data;
-};
-
-// 학습지 상태 확인 api
-export const getWorksheetStatus = async (
-  id: string
-): Promise<GetWorksheetResponse> => {
-  const response = await httpClient.get(`/api/worksheets/${id}`);
   return response.data;
 };
