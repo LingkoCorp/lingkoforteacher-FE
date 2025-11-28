@@ -26,12 +26,12 @@ export function WorksheetForm({ onSubmit }: WorksheetFormProps) {
   const [languageCode, setLanguageCode] = useState<LanguageCode | "">("");
 
   const [level, setLevel] = useState<Level>("intermediate");
-  const [goal, setGoal] = useState("없음");
+  const [goal, setGoal] = useState("");
   const [extraNote, setExtraNote] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!languageCode || !extraNote) return;
+    if (!languageCode || !goal) return;
 
     onSubmit({ level: level, languageCode, goal, extraNote: extraNote });
   };
@@ -117,8 +117,8 @@ export function WorksheetForm({ onSubmit }: WorksheetFormProps) {
           학습할 상황
         </label>
         <textarea
-          value={extraNote}
-          onChange={(e) => setExtraNote(e.target.value)}
+          value={goal}
+          onChange={(e) => setGoal(e.target.value)}
           placeholder="만들고 싶은 학습지의 상황을 자세히 입력해주세요."
           className="input-field min-h-24 resize-none"
           required

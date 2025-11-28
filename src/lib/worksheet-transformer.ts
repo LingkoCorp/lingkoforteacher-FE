@@ -84,7 +84,7 @@ function createFillInBlank(exampleSentence: string): FillInBlank {
 export function transformToWorksheetStructure(
   content: WorksheetContent
 ): WorksheetStructure {
-  const { situation, expressions, vocabulary, grammar_points } = content;
+  const { situationTitle, situation, expressions, vocabulary, grammar_points } = content;
 
   const title = generateTitle(situation);
 

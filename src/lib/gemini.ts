@@ -1,15 +1,38 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Nationality to language mapping for translations
-const NATIONALITY_LANGUAGE_MAP: Record<string, string> = {
-  vietnam: "Vietnamese",
-  japan: "Japanese",
-  china: "Chinese (Simplified)",
-  usa: "English",
-  thailand: "Thai",
-  indonesia: "Indonesian",
-  philippines: "English",
-  malaysia: "Malay",
+export const NATIONALITY_LANGUAGE_MAP: Record<string, string> = {
+  ar: "Arabic",
+  bg: "Bulgarian",
+  cs: "Czech",
+  da: "Danish",
+  de: "German",
+  el: "Greek",
+  en: "English",
+  es: "Spanish",
+  fi: "Finnish",
+  tl: "Filipino (Tagalog)",
+  fr: "French",
+  hi: "Hindi",
+  hr: "Croatian",
+  hu: "Hungarian",
+  id: "Indonesian",
+  it: "Italian",
+  ja: "Japanese",
+  ko: "Korean",
+  ms: "Malay",
+  nl: "Dutch",
+  no: "Norwegian",
+  pl: "Polish",
+  pt: "Portuguese",
+  ro: "Romanian",
+  ru: "Russian",
+  sk: "Slovak",
+  sv: "Swedish",
+  tr: "Turkish",
+  uk: "Ukrainian",
+  vi: "Vietnamese",
+  zh: "Chinese",
 };
 
 // Difficulty level descriptions
@@ -47,6 +70,7 @@ ${extraNote ? `**Additional Requirements**: ${extraNote}` : ""}
 **IMPORTANT**: Generate EXACTLY in this JSON format (minified, no extra whitespace):
 
 {
+  "situationTitle": "A short Korean title (max 20 characters) summarizing the situation",
   "situation": "A detailed situation description in Korean (2-3 sentences) that sets the context for the learning goal",
   "expressions": [
     {"korean": "Korean expression", "romanization": "romanized pronunciation", "translation": "${translationLang} translation"},
@@ -68,6 +92,7 @@ ${extraNote ? `**Additional Requirements**: ${extraNote}` : ""}
 }
 
 **Content Requirements**:
+0. Situation Title: One short Korean phrase (max 20 characters) summarizing the situation
 1. Situation: Contextual description relevant to "${goal}"
 2. Expressions: At least 10 practical phrases for the situation
 3. Vocabulary: At least 20 words (mix of nouns, verbs, adjectives)
@@ -81,6 +106,7 @@ ${extraNote ? `**Additional Requirements**: ${extraNote}` : ""}
 }
 
 export interface WorksheetContent {
+  situationTitle: string;
   situation: string;
   expressions: Array<{
     korean: string;

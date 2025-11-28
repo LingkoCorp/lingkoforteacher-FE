@@ -39,6 +39,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       status: "COMPLETED",
       content: {
+        situationTitle: content.situationTitle,
         situation: content.situation,
         expressions: content.expressions,
         vocabulary: content.vocabulary,

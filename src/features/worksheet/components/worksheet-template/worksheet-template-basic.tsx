@@ -13,7 +13,7 @@ export default function WorksheetTemplateBasic({ worksheetData: worksheetData }:
       {/* Header Section */}
       <div className="space-y-3 print:page-break-after-avoid">
         <h1 className="text-4xl font-bold text-primary print:text-2xl">
-          🏪 카페 아르바이트 한국어
+          🎬 {worksheetData.situationTitle}
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed print:text-base">
           {worksheetData.situation}

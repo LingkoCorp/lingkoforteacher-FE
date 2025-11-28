@@ -18,6 +18,7 @@ export interface GrammarPoint {
 }
 
 export interface WorksheetData {
+  situationTitle: string;
   situation: string;
   expressions: Expression[];
   vocabulary: VocabularyItem[];
