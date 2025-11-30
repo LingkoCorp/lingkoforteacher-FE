@@ -85,7 +85,9 @@ ${extraNote ? `**Additional Requirements**: ${extraNote}` : ""}
       "korean": "Grammar pattern (e.g., -(으)ㄹ 수 있다)",
       "romanization": "romanized form",
       "translation": "${translationLang} explanation of grammar usage",
-      "example": "Korean example sentence using this grammar"
+      "example": "Korean example sentence using this grammar",
+      "example_romanization": "romanized pronunciation of the example sentence",
+      "example_translation": "${translationLang} translation of the example sentence"
     },
     // Generate at least 5 grammar points (appropriate for ${level} level)
   ]
@@ -97,6 +99,13 @@ ${extraNote ? `**Additional Requirements**: ${extraNote}` : ""}
 2. Expressions: At least 10 practical phrases for the situation
 3. Vocabulary: At least 20 words (mix of nouns, verbs, adjectives)
 4. Grammar: At least 5 grammar patterns with examples
+   - Each grammar point must include:
+     - Korean pattern
+     - Romanization of pattern
+     - ${translationLang} explanation of usage
+     - Korean example sentence
+     - Romanization of example sentence
+     - ${translationLang} translation of example sentence
 5. All Korean text must be natural and authentic
 6. Romanization must use standard Korean romanization
 7. Difficulty must match ${level} level
@@ -123,6 +132,8 @@ export interface WorksheetContent {
     romanization: string;
     translation: string;
     example: string;
+    example_romanization: string;  
+    example_translation: string; 
   }>;
 }
 

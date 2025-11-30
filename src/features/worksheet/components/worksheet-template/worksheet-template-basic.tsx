@@ -81,26 +81,24 @@ export default function WorksheetTemplateBasic({ worksheetData: worksheetData }:
         </h2>
         <div className="grid gap-4 print:gap-2">
           {worksheetData.grammar_points.map((gram, idx) => (
-            <Card
-              key={idx}
-              className="p-5 border-l-4 border-l-primary print:p-3 print:break-inside-avoid"
-            >
-              <div className="space-y-2">
+            <Card key={idx} className="p-5 border-l-4 border-l-primary print:p-3 print:break-inside-avoid">
+              <div className="space-y-3">
                 <div>
-                  <div className="text-lg font-bold text-primary print:text-base">
-                    {gram.korean}
-                  </div>
-                  <div className="text-sm text-muted-foreground print:text-xs">
-                    {gram.romanization}
-                  </div>
+                  <div className="text-lg font-bold text-primary print:text-base">{gram.korean}</div>
+                  <div className="text-sm text-muted-foreground print:text-xs">{gram.romanization}</div>
                 </div>
-                <div className="text-base text-foreground print:text-sm">
-                  {gram.translation}
-                </div>
+
+                <div className="text-base text-foreground print:text-sm">{gram.translation}</div>
+
                 <div className="bg-secondary/30 p-3 rounded-md print:p-2 print:bg-opacity-20">
-                  <p className="text-sm text-foreground print:text-xs">
-                    <span className="font-semibold">예시:</span> {gram.example}
+                  <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide print:text-xs">
+                    예문
+                  </div>
+                  <p className="text-sm text-foreground print:text-xs mt-2 mb-1">
+                    {gram.example}
                   </p>
+                  <p className="text-xs text-muted-foreground italic print:text-xs">{gram.example_romanization}</p>
+                  <p className="text-xs text-accent font-medium print:text-xs">{gram.example_translation}</p>
                 </div>
               </div>
             </Card>

@@ -1,3 +1,8 @@
+export interface FillInBlank {
+  question: string;
+  answer: string;
+}
+
 export interface Expression {
   korean: string;
   romanization: string;
@@ -15,6 +20,9 @@ export interface GrammarPoint {
   romanization: string;
   translation: string;
   example: string;
+  example_romanization: string;
+  example_translation: string;
+  exercise: FillInBlank;
 }
 
 export interface WorksheetData {

@@ -15,6 +15,9 @@ interface GrammarPracticeItem {
   pattern: string;
   romanization: string;
   explanation: string;
+  example: string;
+  example_romanization: string;
+  example_translation: string;
   exercise: FillInBlank;
 }
 
@@ -122,6 +125,9 @@ export function transformToWorksheetStructure(
     pattern: gp.korean,
     romanization: gp.romanization,
     explanation: gp.translation,
+    example: gp.example,
+    example_romanization: gp.example_romanization,
+    example_translation: gp.example_translation,
     exercise: createFillInBlank(gp.example),
   }));
 

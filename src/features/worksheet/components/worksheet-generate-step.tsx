@@ -8,6 +8,10 @@ interface WorksheetGenerateStepProps {
   loading: boolean;
 }
 
+const MAX_FAKE_PROGRESS = 95; // loading 중일 때는 95%까지만
+const TICK_MS = 100;          // 0.1초마다
+const STEP = 1.2;             // 한 번에 1.2%씩 증가 (부드럽게)
+
 export default function WorksheetGenerateStep({
   onStart,
   loading,
@@ -24,13 +28,15 @@ export default function WorksheetGenerateStep({
 
       const interval = setInterval(() => {
         setProgress((prev) => {
-          const next = prev + Math.random() * 15;
-          return next >= 90 ? 90 : next;
+          if (prev >= MAX_FAKE_PROGRESS) return prev; // 95%에서 멈춤
+          const next = prev + STEP;
+          return next > MAX_FAKE_PROGRESS ? MAX_FAKE_PROGRESS : next;
         });
-      }, 300);
+      }, TICK_MS);
 
       return () => clearInterval(interval);
     } else {
+      // 실제 작업 끝나면 자연스럽게 100%로 마무리
       setProgress(100);
     }
   }, [loading]);
