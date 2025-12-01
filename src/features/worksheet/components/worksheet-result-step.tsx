@@ -99,14 +99,21 @@ export default function WorksheetResultStep({
             onClick={() => handlePrint?.()}
             className="w-full bg-primary text-primary-foreground py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors"
           >
-            📥 PDF 다운로드
+            PDF 다운로드
+          </button>
+
+          <button
+            onClick={() => navigator.clipboard.writeText("https://www.lingkoforteacher.kr/")}
+            className="w-full bg-secondary text-secondary-foreground py-4 rounded-lg font-semibold text-lg hover:bg-secondary/80 transition-colors"
+          >
+            링크 복사하기
           </button>
 
           <button
             onClick={onReset}
             className="w-full bg-secondary text-secondary-foreground py-4 rounded-lg font-semibold text-lg hover:bg-secondary/80 transition-colors"
           >
-            🏠 홈으로
+            홈으로
           </button>
         </div>
       </div>
