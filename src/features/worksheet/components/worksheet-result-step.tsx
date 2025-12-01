@@ -2,9 +2,17 @@
 
 import Logo from "@/shared/ui/logo";
 import { WorksheetData } from "@/types/worksheet";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import WorksheetTemplateBasic from "./worksheet-template/worksheet-template-basic";
+
+import {
+  ToastProvider,
+  ToastViewport,
+  Toast,
+  ToastTitle,
+  ToastDescription,
+} from "@/shared/ui/toast";
 
 interface WorksheetResultStepProps {
   worksheet: WorksheetData | null;
@@ -19,6 +27,9 @@ export default function WorksheetResultStep({
 }: WorksheetResultStepProps) {
   const printRef = useRef<HTMLDivElement>(null);
 
+  // ✅ 링크 복사 토스트 open 상태
+  const [copyToastOpen, setCopyToastOpen] = useState(false);
+
   const handlePrint = useReactToPrint({
     contentRef: printRef,
     documentTitle: "worksheet",
@@ -27,6 +38,17 @@ export default function WorksheetResultStep({
       body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     `,
   });
+
+  // ✅ 링크 복사 + 토스트 열기
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText("https://www.lingkoforteacher.kr/");
+      setCopyToastOpen(true);
+    } catch (err) {
+      console.error("링크 복사 실패:", err);
+      // 필요하면 여기서 실패용 토스트도 따로 만들 수 있음
+    }
+  };
 
   // 1) 에러만 있는 경우
   if (error && !worksheet) {
@@ -53,7 +75,7 @@ export default function WorksheetResultStep({
     );
   }
 
-  // 2) 안전망: 이 상태는 거의 안 나오겠지만, 혹시 모를 경우
+  // 2) 안전망
   if (!worksheet) {
     return (
       <div className="relative min-h-screen w-full flex flex-col items-center justify-center px-4">
@@ -73,50 +95,69 @@ export default function WorksheetResultStep({
     );
   }
 
-  // 3) 정상적으로 worksheet가 있는 경우 (기존 UI)
+  // 3) 정상적으로 worksheet가 있는 경우
   return (
-    <div className="relative min-h-screen w-full">
-      <div className="absolute top-0 left-2">
-        <Logo />
+    <ToastProvider swipeDirection="right">
+      <div className="relative min-h-screen w-full">
+        <div className="absolute top-0 left-2">
+          <Logo />
+        </div>
+
+        <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 py-12 mt-20">
+          <div className="w-full max-w-3xl mb-8 bg-gradient-to-r from-primary/10 to-accent/10 p-8 rounded-lg text-center">
+            <h1 className="text-3xl font-bold text-primary mb-2">
+              학습지가 생성되었습니다!
+            </h1>
+            <p className="text-muted-foreground">
+              아래의 내용을 확인하고 PDF로 다운로드할 수 있습니다.
+            </p>
+          </div>
+
+          <div ref={printRef} className="w-full max-w-3xl mb-8">
+            <WorksheetTemplateBasic worksheetData={worksheet} />
+          </div>
+
+          <div className="w-full max-w-md space-y-4">
+            <button
+              onClick={() => handlePrint?.()}
+              className="w-full bg-primary text-primary-foreground py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors"
+            >
+              PDF 다운로드
+            </button>
+
+            <button
+              onClick={handleCopyLink}
+              className="w-full bg-secondary text-secondary-foreground py-4 rounded-lg font-semibold text-lg hover:bg-secondary/80 transition-colors"
+            >
+              링크 복사하기
+            </button>
+
+            <button
+              onClick={onReset}
+              className="w-full bg-secondary text-secondary-foreground py-4 rounded-lg font-semibold text-lg hover:bg-secondary/80 transition-colors"
+            >
+              홈으로
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 py-12 mt-20">
-        <div className="w-full max-w-3xl mb-8 bg-gradient-to-r from-primary/10 to-accent/10 p-8 rounded-lg text-center">
-          <h1 className="text-3xl font-bold text-primary mb-2">
-            학습지가 생성되었습니다!
-          </h1>
-          <p className="text-muted-foreground">
-            아래의 내용을 확인하고 PDF로 다운로드할 수 있습니다.
-          </p>
+      {/* ✅ 링크 복사 완료 토스트 */}
+      <Toast
+        open={copyToastOpen}
+        onOpenChange={setCopyToastOpen}
+        duration={2000} // 2초 후 자동 닫힘
+      >
+        <div className="grid gap-1">
+          <ToastTitle>링크 복사 완료</ToastTitle>
+          <ToastDescription>
+            링크가 클립보드에 복사되었습니다.
+          </ToastDescription>
         </div>
+      </Toast>
 
-        <div ref={printRef} className="w-full max-w-3xl mb-8">
-          <WorksheetTemplateBasic worksheetData={worksheet} />
-        </div>
-
-        <div className="w-full max-w-md space-y-4">
-          <button
-            onClick={() => handlePrint?.()}
-            className="w-full bg-primary text-primary-foreground py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors"
-          >
-            PDF 다운로드
-          </button>
-
-          <button
-            onClick={() => navigator.clipboard.writeText("https://www.lingkoforteacher.kr/")}
-            className="w-full bg-secondary text-secondary-foreground py-4 rounded-lg font-semibold text-lg hover:bg-secondary/80 transition-colors"
-          >
-            링크 복사하기
-          </button>
-
-          <button
-            onClick={onReset}
-            className="w-full bg-secondary text-secondary-foreground py-4 rounded-lg font-semibold text-lg hover:bg-secondary/80 transition-colors"
-          >
-            홈으로
-          </button>
-        </div>
-      </div>
-    </div>
+      {/* ✅ 토스트가 실제로 렌더링될 위치 */}
+      <ToastViewport />
+    </ToastProvider>
   );
 }
